@@ -22,7 +22,7 @@
     </ItemGroup>
     
     <ItemGroup>
-        <Using Include="Microsoft.EntityFrameworkCore"/>
+        <Using Include="Microsoft.EntityFrameworkCore" />
     </ItemGroup>
 
 </Project>
