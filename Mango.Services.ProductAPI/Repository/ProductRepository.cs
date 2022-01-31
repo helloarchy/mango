@@ -33,8 +33,24 @@ public class ProductRepository : IProductRepository
         throw new NotImplementedException();
     }
 
-    public Task<bool> DeleteProduct(int productId)
+    public async Task<bool> DeleteProduct(int productId)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var product = await _db.Products.FirstOrDefaultAsync(p => p.ProductId == productId);
+            if (product is null)
+            {
+                return false;
+            }
+            
+            _db.Products.Remove(product);
+            await _db.SaveChangesAsync();
+            
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
     }
 }
