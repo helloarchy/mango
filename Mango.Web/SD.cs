@@ -3,14 +3,14 @@
 /// <summary>
 /// Static details class to hold all constants
 /// </summary>
-public class SD
+public static class Sd
 {
-    public string ProductAPIBase { get; set; }
+    public static string? ProductApiBase { get; set; }
     public enum ApiType
     {
-        GET,
-        POST,
-        PUT,
-        DELETE
+        Get,
+        Post,
+        Put,
+        Delete
     }
 }

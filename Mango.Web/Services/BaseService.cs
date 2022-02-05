@@ -34,9 +34,9 @@ public class BaseService : IBaseService
 
             message.Method = apiRequest.ApiType switch
             {
-                SD.ApiType.POST => HttpMethod.Post,
-                SD.ApiType.PUT => HttpMethod.Put,
-                SD.ApiType.DELETE => HttpMethod.Delete,
+                Sd.ApiType.Post => HttpMethod.Post,
+                Sd.ApiType.Put => HttpMethod.Put,
+                Sd.ApiType.Delete => HttpMethod.Delete,
                 _ => HttpMethod.Get
             };
 
