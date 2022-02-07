@@ -50,9 +50,35 @@ public class ProductController : Controller
         return View(model);
     }
 
-    public IActionResult EditProduct()
+    public async Task<IActionResult> EditProduct(int productId)
     {
-        throw new NotImplementedException();
+        var response = await _productService.GetProductByIdAsync<ResponseDto>(productId);
+
+        if (response is not null && response.IsSuccess)
+        {
+            var result = Convert.ToString(response.Result);
+            var model = JsonConvert.DeserializeObject<ProductDto>(result);
+            return View(model);
+        }
+        
+        return NotFound();
+    }
+    
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> EditProduct(ProductDto model)
+    {
+        if (ModelState.IsValid)
+        {
+            var response = await _productService.UpdateProductAsync<ResponseDto>(model);
+
+            if (response is not null && response.IsSuccess)
+            {
+                return RedirectToAction(nameof(ProductIndex));
+            }
+        }
+
+        return View(model);
     }
 
     public IActionResult DeleteProduct()
