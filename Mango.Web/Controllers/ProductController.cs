@@ -24,13 +24,30 @@ public class ProductController : Controller
             var result = Convert.ToString(response.Result);
             list = JsonConvert.DeserializeObject<List<ProductDto>>(result);
         }
-        
+
         return View(list);
     }
 
-    public IActionResult Create()
+    public IActionResult CreateProduct()
     {
-        throw new NotImplementedException();
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> CreateProduct(ProductDto model)
+    {
+        if (ModelState.IsValid)
+        {
+            var response = await _productService.CreateProductAsync<ResponseDto>(model);
+
+            if (response is not null && response.IsSuccess)
+            {
+                return RedirectToAction(nameof(ProductIndex));
+            }
+        }
+
+        return View(model);
     }
 
     public IActionResult EditProduct()
