@@ -27,4 +27,19 @@ public class ProductController : Controller
         
         return View(list);
     }
+
+    public IActionResult Create()
+    {
+        throw new NotImplementedException();
+    }
+
+    public IActionResult EditProduct()
+    {
+        throw new NotImplementedException();
+    }
+
+    public IActionResult DeleteProduct()
+    {
+        throw new NotImplementedException();
+    }
 }
